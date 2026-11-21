@@ -117,8 +117,8 @@ section h2{font:400 clamp(2.3rem,9vw,3.1rem)/1.15 var(--script);color:var(--cham
 .scratch-box{position:relative;width:280px;height:240px;margin:var(--s3) auto var(--s2);display:grid;place-items:center}
 .scratch-secret{position:absolute;inset:0;background:linear-gradient(145deg,rgba(70,14,26,.85),rgba(35,5,12,.95));border:1px solid var(--gold);border-radius:24px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.6)}
 .scratch-secret h4{font:600 .95rem var(--label);color:var(--champ);letter-spacing:.15em;text-transform:uppercase}
-.scratch-secret .s-date{font:400 1.55rem var(--serif);color:var(--gold);margin:8px 0}
-.scratch-secret p{font-size:.92rem;color:var(--text);opacity:.92;line-height:1.45}
+.scratch-secret .s-date{font:400 1.65rem var(--serif);color:var(--gold);margin:8px 0}
+.scratch-secret p{font-size:.92rem;color:var(--text);opacity:.92;line-height:1.5}
 #scratchCanvas{position:absolute;inset:0;width:100%;height:100%;border-radius:24px;cursor:grab;touch-action:none;z-index:3}
 
 /* ---------- Gallery / Moments ---------- */
@@ -145,11 +145,12 @@ section h2{font:400 clamp(2.3rem,9vw,3.1rem)/1.15 var(--script);color:var(--cham
 .map-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(199,161,90,.4);box-shadow:0 8px 24px rgba(0,0,0,.5);height:240px;margin-bottom:18px}
 .map-wrap iframe{width:100%;height:100%;border:0}
 
-/* ---------- Dress Code ---------- */
-.dress-card{background:rgba(42,7,16,.75);border:1px solid rgba(199,161,90,.3);border-radius:16px;padding:20px;margin-bottom:16px}
-.dress-card h4{font:600 .9rem var(--label);color:var(--gold);letter-spacing:.18em;margin-bottom:8px;text-transform:uppercase}
-
-/* ---------- RSVP Form ---------- */
+/* ---------- RSVP Section & Form ---------- */
+.rsvp-note{background:rgba(52,10,20,.6);border:1px solid rgba(199,161,90,.3);border-radius:18px;padding:22px 20px;margin-bottom:var(--s3);text-align:center;line-height:1.7}
+.rsvp-note p{margin-bottom:10px;font-size:1.06rem}
+.rsvp-note p:last-child{margin-bottom:0}
+.rsvp-details{margin:14px 0;padding:12px 0;border-top:1px solid rgba(199,161,90,.25);border-bottom:1px solid rgba(199,161,90,.25);color:var(--champ);font-size:1.05rem}
+.rsvp-details strong{color:var(--gold);font-family:var(--label);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase}
 form{display:grid;gap:var(--s2);text-align:left;background:rgba(45,8,18,.75);padding:26px;border-radius:20px;border:1px solid rgba(199,161,90,.35)}
 label{font:600 .74rem var(--label);letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
 input,select,textarea{width:100%;min-height:48px;margin-top:6px;padding:12px 14px;border-radius:10px;border:1px solid rgba(199,161,90,.45);background:rgba(66,13,25,.8);color:var(--text)}
@@ -243,17 +244,17 @@ select option{background:#2a0710;color:var(--text)}
     <span class="sec-icon rv">✨</span>
     <h2 class="rv">Scratch to Reveal</h2>
     <div class="div rv"></div>
-    <p class="rv" style="font-size:.95rem;opacity:.9">Rub the golden card below to reveal our wedding &amp; reception dates!</p>
+    <p class="rv" style="font-size:.95rem;opacity:.9">Rub the golden card below to reveal our reception date!</p>
 
     <div class="scratch-box rv">
       <div class="scratch-secret">
-        <h4>Save Our Dates</h4>
-        <div class="s-date">Dec 13 &amp; 15, 2026</div>
-        <p>Wedding: 13 Dec · Jhargram<br>Reception: 15 Dec · 7:24 PM<br>Emerald Banquet Hall, New Town</p>
+        <h4>Save Our Date</h4>
+        <div class="s-date">Dec 15, 2026</div>
+        <p>Reception: 15 Dec · 7:00 PM<br>Emerald Banquet Hall, New Town</p>
       </div>
       <canvas id="scratchCanvas" width="280" height="240"></canvas>
     </div>
-    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sharmistha+%26+Sourav+Wedding+Reception&dates=20261215T135400Z/20261215T180000Z&details=Wedding+on+13+Dec+2026+at+Jhargram.+Grand+Reception+on+15+Dec+2026+at+7:24+PM.&location=Emerald+Banquet+Hall,+TOWER+Plot+No.+IID,+E+K,+Street+Number+692,+AA+II,+Action+Area+IID,+New+Town,+West+Bengal" target="_blank" rel="noopener noreferrer" class="btn rv" style="margin-top:10px">Add to Calendar</a>
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sourav+%26+Sharmistha+Reception&dates=20261215T133000Z/20261215T173000Z&details=Grand+Reception+on+15+Dec+2026+at+7:00+PM+onwards.&location=Emerald+Banquet+Hall,+TOWER+Plot+No.+IID,+E+K,+Street+Number+692,+AA+II,+Action+Area+IID,+New+Town,+West+Bengal" target="_blank" rel="noopener noreferrer" class="btn rv" style="margin-top:10px">Add to Calendar</a>
   </section>
 
   <!-- Photo Gallery Showcase -->
@@ -290,7 +291,7 @@ select option{background:#2a0710;color:var(--text)}
       <div><b id="cd-mins">00</b><small>Minutes</small></div>
       <div><b id="cd-secs">00</b><small>Seconds</small></div>
     </div>
-    <p class="lbl rv">Wedding: 13 Dec 2026 · Reception: 15 Dec 2026, 7:24 PM</p>
+    <p class="lbl rv">Wedding: 13 Dec 2026 · Reception: 15 Dec 2026, 7:00 PM</p>
   </section>
 
   <!-- Wedding Timeline / Schedule -->
@@ -315,27 +316,12 @@ select option{background:#2a0710;color:var(--text)}
     <div class="tl-group rv">
       <div class="day-title">TUESDAY, DEC 15, 2026</div>
       <div class="ev-item">
-        <div class="time">7:24 PM</div>
+        <div class="time">7:00 PM</div>
         <div>
           <h4>Grand Reception</h4>
           <p>Evening celebration, warm greetings &amp; gala dinner at <strong>Emerald Banquet Hall</strong>, Action Area IID, New Town, West Bengal.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Dress Code -->
-  <section id="dresscode">
-    <span class="sec-icon rv">👔</span>
-    <h2 class="rv">Dress Code</h2>
-    <div class="div rv"></div>
-    <div class="dress-card rv">
-      <h4>Women</h4>
-      <p>Traditional sarees, lehengas, or elegant formal attire in festive &amp; jewel tones.</p>
-    </div>
-    <div class="dress-card rv">
-      <h4>Men</h4>
-      <p>Traditional kurta-pajama, sherwani, or formal suits.</p>
     </div>
   </section>
 
@@ -354,7 +340,7 @@ select option{background:#2a0710;color:var(--text)}
 
     <!-- Reception Venue & Map -->
     <div class="venue-card rv">
-      <span class="v-tag">Grand Reception · 15 Dec 2026 · 7:24 PM</span>
+      <span class="v-tag">Grand Reception · 15 Dec 2026 · 7:00 PM</span>
       <h3>Emerald Banquet Hall</h3>
       <address>TOWER Plot No. IID, E K, Street Number 692, AA II, Action Area IID, New Town, West Bengal</address>
       <div class="map-wrap">
@@ -379,15 +365,26 @@ select option{background:#2a0710;color:var(--text)}
     <span class="sec-icon rv">✉</span>
     <h2 class="rv">RSVP &amp; Wishes</h2>
     <div class="div rv"></div>
-    <p class="rv" style="font-size:.95rem;margin-bottom:var(--s3)">Share your warm wishes or confirm your presence directly with us on WhatsApp</p>
+
+    <div class="rsvp-note rv">
+      <p>With great joy, we invite you to celebrate the special evening of <strong>Sourav &amp; Sharmistha</strong>.</p>
+      <p>Your gracious presence will make our reception celebration even more memorable.</p>
+      <p>Kindly confirm your attendance (RSVP).</p>
+      <div class="rsvp-details">
+        <div><strong>Date:</strong> 15th December 2026</div>
+        <div><strong>Time:</strong> 7:00 PM onwards</div>
+        <div><strong>Venue:</strong> Emerald Banquet Hall</div>
+      </div>
+      <p style="color:var(--champ)">We look forward to celebrating with you! ❤️</p>
+    </div>
 
     <form id="rsvpForm" class="rv" novalidate>
       <div>
         <label for="fm">Warm Wishes / RSVP Message</label>
-        <textarea id="fm" name="message" placeholder="Write your blessings, wishes, or RSVP note for Sharmistha & Sourav..." required></textarea>
+        <textarea id="fm" name="message" placeholder="Write your blessings, wishes, or RSVP confirmation for Sourav & Sharmistha..." required></textarea>
         <div id="fme" class="err"></div>
       </div>
-      <button class="btn" type="submit" style="margin-top:10px">Send Wishes on WhatsApp</button>
+      <button class="btn" type="submit" style="margin-top:10px">Send RSVP on WhatsApp</button>
       <p id="st" role="status"></p>
     </form>
   </section>
@@ -578,7 +575,7 @@ rsvpForm.addEventListener("submit", function(e) {
     return;
   }
 
-  const msgText = `💍 *Wedding Wishes for Sharmistha & Sourav*\n*Message:* ${note}`;
+  const msgText = `💍 *RSVP & Wishes for Sourav & Sharmistha*\n*Message:* ${note}`;
 
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msgText)}`, "_blank");
   statusMsg.className = "ok";
