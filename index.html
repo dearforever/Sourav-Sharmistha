@@ -121,12 +121,46 @@ section h2{font:400 clamp(2.3rem,9vw,3.1rem)/1.15 var(--script);color:var(--cham
 .scratch-secret p{font-size:.92rem;color:var(--text);opacity:.92;line-height:1.5}
 #scratchCanvas{position:absolute;inset:0;width:100%;height:100%;border-radius:24px;cursor:grab;touch-action:none;z-index:3}
 
-/* ---------- Gallery / Moments ---------- */
-.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:var(--s3)}
-.gallery-item{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:14px;border:1px solid rgba(199,161,90,.4);box-shadow:0 8px 20px rgba(0,0,0,.5);background:rgba(20,2,6,.6)}
-.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease;display:block}
-.gallery-item:hover img{transform:scale(1.06)}
-.gallery-item::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 25px rgba(42,7,16,.6);pointer-events:none}
+/* ---------- Gallery / Moments (Free-Crop Swipe Slider) ---------- */
+.gallery-slider{position:relative;margin-top:var(--s3)}
+.gallery-track{
+  display:flex;align-items:center;
+  overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.gallery-track::-webkit-scrollbar{display:none}
+.gallery-slide{
+  flex:0 0 100%;width:100%;scroll-snap-align:center;
+  display:flex;justify-content:center;align-items:center;
+  padding:4px 6px 12px;
+}
+.gallery-frame{
+  display:inline-flex;justify-content:center;align-items:center;
+  max-width:100%;border-radius:16px;overflow:hidden;
+  border:1px solid rgba(199,161,90,.5);
+  box-shadow:0 10px 26px rgba(0,0,0,.55);
+  background:rgba(20,2,6,.6);
+}
+.gallery-frame img{
+  display:block;max-width:100%;max-height:70vh;width:auto;height:auto;
+}
+.gallery-controls{
+  display:flex;align-items:center;justify-content:center;gap:16px;margin-top:10px;
+}
+.g-nav{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid rgba(199,161,90,.55);background:rgba(52,10,20,.85);
+  color:var(--champ);font-size:1.1rem;cursor:pointer;
+  display:grid;place-items:center;transition:background .25s,color .25s;
+}
+.g-nav:hover,.g-nav:active{background:var(--gold);color:var(--ox)}
+.g-dots{display:flex;align-items:center;gap:8px}
+.g-dot{
+  width:8px;height:8px;border-radius:999px;border:0;padding:0;cursor:pointer;
+  background:rgba(199,161,90,.35);transition:width .3s,background .3s;
+}
+.g-dot.active{width:24px;background:var(--gold)}
+.g-hint{font:600 .66rem var(--label);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-top:10px}
 
 /* ---------- Program Timeline & Events ---------- */
 .tl-group{background:rgba(52,10,20,.6);border:1px solid rgba(199,161,90,.3);border-radius:18px;padding:22px;margin-bottom:20px;text-align:left}
@@ -257,26 +291,48 @@ select option{background:#2a0710;color:var(--text)}
     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sourav+%26+Sharmistha+Reception&dates=20261215T133000Z/20261215T173000Z&details=Grand+Reception+on+15+Dec+2026+at+7:00+PM+onwards.&location=Emerald+Banquet+Hall,+TOWER+Plot+No.+IID,+E+K,+Street+Number+692,+AA+II,+Action+Area+IID,+New+Town,+West+Bengal" target="_blank" rel="noopener noreferrer" class="btn rv" style="margin-top:10px">Add to Calendar</a>
   </section>
 
-  <!-- Photo Gallery Showcase -->
+  <!-- Photo Gallery Showcase (Uncropped Swipe Slider) -->
   <section id="gallery">
     <span class="sec-icon rv">📸</span>
     <h2 class="rv">Cherished Moments</h2>
     <div class="div rv"></div>
     <p class="rv" style="font-size:.95rem;margin-bottom:10px">Glimpses of love leading to our forever</p>
 
-    <div class="gallery-grid rv">
-      <div class="gallery-item">
-        <img src="https://i.ibb.co/fPZXbWH/IMG-20261121-WA0020.jpg" alt="Sharmistha and Sourav Moment 1" loading="lazy">
+    <div class="gallery-slider rv">
+      <div class="gallery-track" id="galleryTrack" aria-label="Couple photo gallery">
+        <div class="gallery-slide">
+          <div class="gallery-frame">
+            <img src="https://i.ibb.co/fPZXbWH/IMG-20261121-WA0020.jpg" alt="Sharmistha and Sourav Moment 1">
+          </div>
+        </div>
+        <div class="gallery-slide">
+          <div class="gallery-frame">
+            <img src="https://i.ibb.co/39DX7dDY/IMG-20261121-WA0021.jpg" alt="Sharmistha and Sourav Moment 2">
+          </div>
+        </div>
+        <div class="gallery-slide">
+          <div class="gallery-frame">
+            <img src="https://i.ibb.co/k28kRynD/IMG-20261121-WA0025.jpg" alt="Sharmistha and Sourav Moment 3">
+          </div>
+        </div>
+        <div class="gallery-slide">
+          <div class="gallery-frame">
+            <img src="https://i.ibb.co/bgyRkYNZ/IMG-20261121-WA0022.jpg" alt="Sharmistha and Sourav Moment 4">
+          </div>
+        </div>
       </div>
-      <div class="gallery-item">
-        <img src="https://i.ibb.co/39DX7dDY/IMG-20261121-WA0021.jpg" alt="Sharmistha and Sourav Moment 2" loading="lazy">
+
+      <div class="gallery-controls">
+        <button class="g-nav" id="gPrev" type="button" aria-label="Previous photo">‹</button>
+        <div class="g-dots" id="gDots" role="tablist" aria-label="Photo selector">
+          <button class="g-dot active" type="button" data-idx="0" aria-label="Photo 1"></button>
+          <button class="g-dot" type="button" data-idx="1" aria-label="Photo 2"></button>
+          <button class="g-dot" type="button" data-idx="2" aria-label="Photo 3"></button>
+          <button class="g-dot" type="button" data-idx="3" aria-label="Photo 4"></button>
+        </div>
+        <button class="g-nav" id="gNext" type="button" aria-label="Next photo">›</button>
       </div>
-      <div class="gallery-item">
-        <img src="https://i.ibb.co/k28kRynD/IMG-20261121-WA0025.jpg" alt="Sharmistha and Sourav Moment 3" loading="lazy">
-      </div>
-      <div class="gallery-item">
-        <img src="https://i.ibb.co/bgyRkYNZ/IMG-20261121-WA0022.jpg" alt="Sharmistha and Sourav Moment 4" loading="lazy">
-      </div>
+      <p class="g-hint">Swipe to view photos</p>
     </div>
   </section>
 
@@ -439,6 +495,46 @@ function initCountdown() {
   setInterval(update, 1000);
 }
 initCountdown();
+
+/* ---------- Gallery Slider Controls ---------- */
+function initGallerySlider() {
+  const track = document.getElementById("galleryTrack");
+  const dots = Array.from(document.querySelectorAll(".g-dot"));
+  const prevBtn = document.getElementById("gPrev");
+  const nextBtn = document.getElementById("gNext");
+  if (!track || !dots.length) return;
+
+  let current = 0;
+
+  function setActiveDot(idx) {
+    current = idx;
+    dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+  }
+
+  function goTo(idx) {
+    const total = dots.length;
+    const target = (idx + total) % total;
+    track.scrollTo({ left: target * track.clientWidth, behavior: "smooth" });
+    setActiveDot(target);
+  }
+
+  prevBtn.addEventListener("click", () => goTo(current - 1));
+  nextBtn.addEventListener("click", () => goTo(current + 1));
+  dots.forEach(dot => {
+    dot.addEventListener("click", () => goTo(Number(dot.dataset.idx)));
+  });
+
+  let scrollTimer;
+  track.addEventListener("scroll", () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      if (!track.clientWidth) return;
+      const idx = Math.round(track.scrollLeft / track.clientWidth);
+      setActiveDot(Math.max(0, Math.min(dots.length - 1, idx)));
+    }, 60);
+  }, { passive: true });
+}
+initGallerySlider();
 
 /* ---------- Scratch to Reveal Canvas ---------- */
 function initScratch() {
